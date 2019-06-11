@@ -133,7 +133,7 @@ PRIMARY KEY("id"),
 "last_name" VARCHAR (255) NOT NULL,
 "created_at" timestamp NOT NULL,
 "updated_at" timestamp NOT NULL,
-FOREIGN KEY (user_id) REFERENCES users (id)
+FOREIGN KEY (\"user_id\") REFERENCES users (\"id\")
 );`
 
 	res, err := fizz.AString(`
@@ -285,7 +285,7 @@ func (p *PostgreSQLSuite) Test_Postgres_RenameIndex() {
 func (p *PostgreSQLSuite) Test_Postgres_AddForeignKey() {
 	r := p.Require()
 
-	ddl := `ALTER TABLE profiles ADD CONSTRAINT profiles_users_id_fk FOREIGN KEY (user_id) REFERENCES users (id);`
+	ddl := `ALTER TABLE profiles ADD CONSTRAINT profiles_users_id_fk FOREIGN KEY (\"user_id\") REFERENCES users (\"id\");`
 
 	res, _ := fizz.AString(`add_foreign_key("profiles", "user_id", {"users": ["id"]}, {})`, pgt)
 	r.Equal(ddl, res)
