@@ -245,8 +245,8 @@ func (p *Postgres) colType(c fizz.Column) string {
 }
 
 func (p *Postgres) buildForeignKey(t fizz.Table, fk fizz.ForeignKey, onCreate bool) string {
-	refs := fmt.Sprintf("%s (%s)", fk.References.Table, strings.Join(fk.References.Columns, ", "))
-	s := fmt.Sprintf("FOREIGN KEY (%s) REFERENCES %s", fk.Column, refs)
+	refs := fmt.Sprintf("%s (\"%s\")", fk.References.Table, strings.Join(fk.References.Columns, ", "))
+	s := fmt.Sprintf("FOREIGN KEY (\"%s\") REFERENCES %s", fk.Column, refs)
 
 	if onUpdate, ok := fk.Options["on_update"]; ok {
 		s += fmt.Sprintf(" ON UPDATE %s", onUpdate)
